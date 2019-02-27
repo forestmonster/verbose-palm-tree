@@ -2,10 +2,13 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from datetime import datetime
+from os import getenv
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+
+app.config['SECRET_KEY'] = getenv('FLASK_SECRET_KEY')
 
 
 @app.route("/")
