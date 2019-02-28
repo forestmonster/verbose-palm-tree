@@ -6,9 +6,7 @@
 {% block page_content %}
     <div class="page-header">
       <h1>Welcome</h1>
-    </div>
-    <div class="page">
-        <h1>Here's a form for you.</h1>
+      <p>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</p>
     </div>
     <div class="container">
         <div class="jumbotron">
@@ -17,4 +15,5 @@
             <p>Time with seconds: {{ moment(current_time).format('LTS') }}</p>
         </div>
     </div>
+    {{ wtf.quick_form(form) }}
 {% endblock %}
