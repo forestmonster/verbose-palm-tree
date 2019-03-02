@@ -196,5 +196,5 @@ tags
 [._]*.un~
 
 config.py
-flasky.db
+data.sqlite
 # End of https://www.gitignore.io/api/vim,flask,python

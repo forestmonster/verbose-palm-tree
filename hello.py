@@ -1,17 +1,27 @@
+import os
 from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from datetime import datetime
 from os import getenv
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "data.sqlite"
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = getenv("FLASK_SECRET_KEY")
+
+db = SQLAlchemy(app)
 
 
 class NameForm(FlaskForm):
@@ -25,7 +35,7 @@ def index():
     if form.validate_on_submit():
         old_name = session.get("name")
         if old_name is not None and old_name != form.name.data:
-            flash(message="Looks like you have changed your name!", category="warning")
+            flash(message="Looks like you have changed your name!", category="info")
         session["name"] = form.name.data
         return redirect(url_for("index"))
     return render_template(
