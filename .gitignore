@@ -195,4 +195,6 @@ tags
 # Persistent undo
 [._]*.un~
 
+config.py
+flasky.db
 # End of https://www.gitignore.io/api/vim,flask,python
