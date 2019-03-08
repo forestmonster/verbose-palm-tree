@@ -15,7 +15,9 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "data.sqlite")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "data.sqlite"
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = getenv("FLASK_SECRET_KEY")
 
@@ -57,7 +59,10 @@ def index():
         session["name"] = form.name.data
         return redirect(url_for("index"))
     return render_template(
-        "index.html", current_time=datetime.utcnow(), form=form, name=session.get("name")
+        "index.html",
+        current_time=datetime.utcnow(),
+        form=form,
+        name=session.get("name"),
     )
 
 
