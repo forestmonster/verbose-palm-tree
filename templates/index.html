@@ -4,19 +4,19 @@
 {% block title %}Flasky{% endblock %}
 
 {% block page_content %}
-    <div class="page-header">
-      <h1>Welcome</h1>
-      <p>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</p>
-      {% if not known %}
-      <p>Pleased to meet you!</p>
-      {% else %}
-      <p>happy to see you again!</p>
-      {% endif %}
-    </div>
-    <div class="container">
-      <p>The local date and time is {{ moment(current_time).format('LLLL') }}.</p>
-      <p>That was {{ moment(current_time).fromNow(refresh=True) }}.</p>
-      <p>Time with seconds: {{ moment(current_time).format('LTS') }}</p>
-    </div>
-    {{ wtf.quick_form(form) }}
+<div class="page-header">
+  <h1>Welcome</h1>
+  <p>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</p>
+  {% if not known %}
+  <p>Pleased to meet you!</p>
+  {% else %}
+  <p>happy to see you again!</p>
+  {% endif %}
+</div>
+{{ wtf.quick_form(form) }}
+<div class="container">
+  <p>The local date and time is {{ moment(current_time).format('LLLL') }}.</p>
+  <p>That was {{ moment(current_time).fromNow(refresh=True) }}.</p>
+  <p>Time with seconds: {{ moment(current_time).format('LTS') }}</p>
+</div>
 {% endblock %}
