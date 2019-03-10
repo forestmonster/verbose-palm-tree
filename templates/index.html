@@ -8,7 +8,7 @@
   <h1>Welcome</h1>
   <p>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</p>
   {% if not known %}
-  <p>Pleased to meet you!</p>
+  <p>Pleased to meet you! It is {{ moment(current_time).format('LLLL') }}.</p>
   {% else %}
   <p>happy to see you again!</p>
   {% endif %}
