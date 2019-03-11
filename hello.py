@@ -12,14 +12,15 @@ from wtforms.validators import DataRequired
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
-moment = Moment(app)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "data.sqlite")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY")
+
+bootstrap = Bootstrap(app)
+moment = Moment(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class NameForm(FlaskForm):
