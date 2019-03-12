@@ -1,0 +1,6 @@
+There's a new user! See below:
+
+###
+{{ user }}
+
+###
