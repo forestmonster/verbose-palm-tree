@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail
@@ -7,6 +8,7 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from datetime import datetime
+from threading import Thread
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
@@ -106,6 +108,11 @@ def internal_server_error(e):
     return render_template("500.html"), 500
 
 
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+
 def send_email(to, subject, template, **kwargs):
     msg = Message(
         app.config["FLASKY_MAIL_SUBJECT_PREFIX"] + subject,
@@ -114,4 +121,7 @@ def send_email(to, subject, template, **kwargs):
     )
     msg.body = render_template(template + ".txt", **kwargs)
     msg.html = render_template(template + ".html", **kwargs)
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+    app.logger.info("Sending mail")
     mail.send(msg)
