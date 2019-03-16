@@ -6,11 +6,8 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
 from datetime import datetime
 from threading import Thread
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -33,21 +30,6 @@ moment = Moment(app)
 db = SQLAlchemy(app)
 mail = Mail(app)
 migrate = Migrate(app, db)
-
-
-class NameForm(FlaskForm):
-    name = StringField("What is your name?", validators=[DataRequired()])
-    submit = SubmitField("Submit")
-
-
-class Role(db.Model):
-    __tablename__ = "roles"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    users = db.relationship("User", backref="role", lazy="dynamic")
-
-    def __repr__(self):
-        return "<Role %r>" % self.name
 
 
 class User(db.Model):
