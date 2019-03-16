@@ -48,48 +48,6 @@ def make_shell_context():
     return dict(db=db, User=User, Role=Role)
 
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    form = NameForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.name.data).first()
-        if user is None:
-            user = User(username=form.name.data)
-            db.session.add(user)
-            # db.session.commit()
-            session["known"] = False
-            if app.config["FLASKY_ADMIN"]:
-                send_email(app.config["FLASKY_ADMIN"], "New User", "mail/new_user", user=user)
-        else:
-            session["known"] = True
-        session["name"] = form.name.data
-        form.name.data = ""
-        return redirect(url_for("index"))
-    return render_template(
-        "index.html",
-        current_time=datetime.utcnow(),
-        form=form,
-        name=session.get("name"),
-        known=session.get("known", False),
-    )
-
-
-@app.route("/user/", defaults={"name": "Blah"})
-@app.route("/user/<name>")
-def user(name):
-    return render_template("user.html", name=name)
-
-
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template("404.html"), 404
-
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template("500.html"), 500
-
-
 def send_async_email(app, msg):
     with app.app_context():
         mail.send(msg)
