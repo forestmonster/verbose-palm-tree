@@ -20,4 +20,7 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
 
+    # Applications created with this factory function are incomplete, since
+    # they're missing routes and custom error pages.
+
     return app
