@@ -196,6 +196,6 @@ tags
 [._]*.un~
 
 config.txt
-data.sqlite
+*.sqlite
 .vscode
 # End of https://www.gitignore.io/api/vim,flask,python
