@@ -1,4 +1,5 @@
 from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model):
@@ -7,9 +8,14 @@ class User(db.Model):
     username = db.Column(db.String(64), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
     favorite_color = db.Column(db.String(64), index=True, nullable=True)
+    password_hash = db.Column(db.String(128))
 
     def __repr__(self):
         return "<User %r>" % self.username
+
+    @property
+    def password(self):
+        raise AttributeError("Password is not a readable attribute.")
 
 
 class Role(db.Model):
