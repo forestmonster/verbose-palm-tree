@@ -65,6 +65,17 @@ visitor = "*"
 
 [[package]]
 category = "main"
+description = "User session management for Flask"
+name = "flask-login"
+optional = false
+python-versions = "*"
+version = "0.4.1"
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
+category = "main"
 description = "Flask extension for sending email"
 name = "flask-mail"
 optional = false
@@ -221,7 +232,7 @@ python-versions = "*"
 version = "2.2.1"
 
 [metadata]
-content-hash = "025d8ca4adb98e61ca3ad8e2c5660780bd0f9ccce92dc68d30fa3a665751cef1"
+content-hash = "27f415b968a01968b09cfd40440c3687f0d1b2a4ae798c6cf4daf20a73016fca"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -231,6 +242,7 @@ click = ["2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13", "5b
 dominate = ["4076735c0745fe771e57b2313dbb4bfeec42731816ee23cee509f66e8912aa51", "4b9fd42d2824b79761799590697db45bf93daad511b130c50513af38da33df9b"]
 flask = ["2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48", "a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05"]
 flask-bootstrap = ["cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"]
+flask-login = ["c815c1ac7b3e35e2081685e389a665f2c74d7e077cb93cecabaea352da4752ec"]
 flask-mail = ["22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"]
 flask-migrate = ["a361578cb829681f860e4de5ed2c48886264512f0c16144e404c36ddc95ab49c", "c24d105c5d6cc670de20f8cbfb909e04f4e04b8784d0df070005944de1f21549"]
 flask-moment = ["5ff8a73487e2e11913718b6a972814a130b4aa454198195b2004b71b3a2c07b7", "8379acdc9cda1227573ae52aac2e5b4b391e77ed300c70d49b0a929d0aa76680"]
