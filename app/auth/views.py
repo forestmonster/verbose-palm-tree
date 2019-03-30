@@ -26,4 +26,3 @@ def logout():
     logout_user()
     flask("You have been logged out.")
     return redirect(url_for("main.index"))
-
