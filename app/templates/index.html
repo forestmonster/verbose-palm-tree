@@ -16,8 +16,10 @@
   {% if not known %}
   <p>Pleased to meet you! It is {{ moment(current_time).format('LLLL') }}.</p>
   {% else %}
-  <p>happy to see you again!</p>
+  <p>Happy to see you again!</p>
   {% endif %}
+
 </div>
+
 {{ wtf.quick_form(form) }}
 {% endblock %}
