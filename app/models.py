@@ -41,6 +41,7 @@ class User(UserMixin, db.Model):
         return s.dumps({"confirm": self.id}).decode("utf-8")
 
     def confirm(self, token):
+        """Ensure that the id from the token matches the logged-in user."""
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
