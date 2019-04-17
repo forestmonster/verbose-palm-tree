@@ -42,16 +42,17 @@ class User(UserMixin, db.Model):
 
     def confirm(self, token):
         """Ensure that the id from the token matches the logged-in user."""
-        s = Serializer(current_app.config['SECRET_KEY'])
+        s = Serializer(current_app.config["SECRET_KEY"])
         try:
-            data = s.loads(token.encode('utf-8'))
+            data = s.loads(token.encode("utf-8"))
         except:
             return False
-        if data.get('confirm') != self.id:
+        if data.get("confirm") != self.id:
             return False
         self.confirmed = True
         db.session.add(self)
         return True
+
 
 class Role(db.Model):
     __tablename__ = "roles"
