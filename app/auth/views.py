@@ -3,6 +3,7 @@ from flask_login import login_user, logout_user, login_required
 from . import auth
 from ..models import db, User
 from .forms import LoginForm, RegistrationForm
+from ..email import send_email
 
 
 @auth.route("/login", methods=["GET", "POST"])
@@ -45,6 +46,16 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        flash("You can now log in.")
-        return redirect(url_for("auth.login"))
+        token = user.generate_confirmation_token()
+        send_email(
+            user.email,
+            "Confirm your account",
+            "auth/email/confirm",
+            user=user,
+            token=token,
+        )
+        flash(
+            "We've sent a confirmation e-mail to the address you provided. Please click on the link we sent, to confirm your e-mail."
+        )
+        return redirect(url_for("main.index"))
     return render_template("auth/register.html", form=form)
