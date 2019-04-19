@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from ..models import db, User
 from .forms import LoginForm, RegistrationForm
@@ -59,3 +59,16 @@ def register():
         )
         return redirect(url_for("main.index"))
     return render_template("auth/register.html", form=form)
+
+
+@auth.route("/confirm/<token>")
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for("main.index"))
+    if current_user.confirm(token):
+        db.session.commit()
+        flash("You have confirmed your account. Thanks!")
+    else:
+        flash("The confirmation link is invalid or has expired.")
+    return redirect(url_for("main.index"))
