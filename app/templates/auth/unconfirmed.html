@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Account confirmation</h1>
+    <h3>Let's get you confirmed.</h3>
+    <p>Please confirm your account, to access our site. Check your inbox. You
+       should have received an e-mail from us, containing a confirmation link.
+       Click that link to confirm your membership.</p>
+    <p>Need another confirmation e-mail? <a href="{{ url_for('auth.confirm') }}">Click here</a>.</p>
+</div>
