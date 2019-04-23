@@ -21,4 +21,5 @@ def send_email(to, subject, template, **kwargs):
     thr = Thread(target=send_async_email, args=[app, msg])
     thr.start()
     app.logger.info("Sending mail")
+    app.logger.info(f"Mail body will be {msg.body}.")
     return thr
