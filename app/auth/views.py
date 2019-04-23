@@ -108,7 +108,7 @@ def resend_confirmation():
 
 
 @auth.route("/update-password")
-@login.required
+@login_required
 def update_password(methods=["GET", "POST"]):
     """Allow the user to update their password."""
     form = PasswordUpdateForm()
