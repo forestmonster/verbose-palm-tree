@@ -51,3 +51,11 @@ class UserModelTestCase(unittest.TestCase):
         token = u.generate_confirmation_token(expiration=1)
         sleep(2)
         self.assertFalse(u.confirm(token))
+
+    def test_valid_reset_token(self):
+        u = User(password="cat")
+        db.session.add(u)
+        db.session.commit()
+        token = u.generate_reset_token()
+        self.assertTrue(User.reset_password(token, "dog"))
+        self.assertTrue(u.verify_password("dog"))
