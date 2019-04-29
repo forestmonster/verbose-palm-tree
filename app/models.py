@@ -40,6 +40,10 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config["SECRET_KEY"], expiration)
         return s.dumps({"confirm": self.id}).decode("utf-8")
 
+    def generate_reset_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'reset': self.id}).decode('utf-8')
+
     def confirm(self, token):
         """Ensure that the id from the token matches the logged-in user."""
         s = Serializer(current_app.config["SECRET_KEY"])
