@@ -45,6 +45,19 @@ class RegistrationForm(FlaskForm):
             raise ValidationError("Username already in use.")
 
 
+class ChangePasswordForm(FlaskForm):
+    old_password = PasswordField("Old password", validators=[DataRequired()])
+    password = PasswordField(
+        "New password",
+        validators=[
+            DataRequired(),
+            EqualTo("password2", message="Passwords do not match."),
+        ],
+    )
+    password2 = PasswordField("Confirm new password", validators=[DataRequired()])
+    submit = SubmitField("Update Password")
+
+
 class PasswordUpdateForm(FlaskForm):
     """Allow user to update their password."""
 
