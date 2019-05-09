@@ -64,10 +64,10 @@ class PasswordUpdateForm(FlaskForm):
     old_password = PasswordField("Current password", validators=[DataRequired()])
     new_password = PasswordField("New password", validators=[DataRequired()])
     new_password2 = PasswordField(
-        "Retype current password to confirm",
+        "Retype old password to confirm",
         validators=[
             DataRequired(),
-            EqualTo("new_password", message="Passwords must match."),
+            EqualTo("old_password", message="Passwords must match."),
         ],
     )
     submit = SubmitField("Confirm password change")
