@@ -115,21 +115,21 @@ def resend_confirmation():
     return redirect(url_for("main.index"))
 
 
-@auth.route("/update-password")
+@auth.route("/update-password", methods=["GET", "POST"])
 @login_required
-def update_password(methods=["GET", "POST"]):
+def update_password():
     """Allow the user to update their password."""
     form = PasswordUpdateForm()
     if form.validate_on_submit():
         if current_user.verify_password(form.old_password.data):
-            current_user.password = form.password.data
+            current_user.password = form.new_password.data
             db.session.add(current_user)
             db.session.commit()
             flash("Your password has been updated.")
             return redirect(url_for("main.index"))
         else:
             flash("Invalid password.")
-    return render_template("auth/update_password.html")
+    return render_template("auth/update_password.html", form=form)
 
 
 @auth.route("/reset", methods=["GET", "POST"])
