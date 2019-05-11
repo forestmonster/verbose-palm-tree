@@ -4,6 +4,7 @@ from . import auth
 from ..models import User
 from .. import db
 from .forms import (
+    ChangeEmailForm,
     LoginForm,
     PasswordResetForm,
     PasswordResetRequestForm,
