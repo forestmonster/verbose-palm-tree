@@ -41,24 +41,23 @@ class User(UserMixin, db.Model):
         return s.dumps({"confirm": self.id}).decode("utf-8")
 
     def generate_reset_token(self, expiration=3600):
-        s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'reset': self.id}).decode('utf-8')
+        s = Serializer(current_app.config["SECRET_KEY"], expiration)
+        return s.dumps({"reset": self.id}).decode("utf-8")
 
     @staticmethod
     def reset_password(token, new_password):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        s = Serializer(current_app.config["SECRET_KEY"])
         try:
-            data = s.loads(token.encode('utf.8'))
+            data = s.loads(token.encode("utf.8"))
         except Exception as ex:
             # sentry.capture_exception(ex)
             return False
-        user = User.query.get(data.get('reset'))
+        user = User.query.get(data.get("reset"))
         if user is None:
             return False
         user.password = new_password
         db.session.add(user)
         return True
-
 
     def confirm(self, token):
         """Ensure that the id from the token matches the logged-in user."""
