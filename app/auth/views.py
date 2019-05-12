@@ -195,3 +195,14 @@ def change_email_request():
         else:
             flash("Invalid e-mail or password.")
     return render_template("auth/change_email.html", form=form)
+
+
+@auth.route("/change_email/<token>")
+@login_required
+def change_email(token):
+    if current_user.change_email(token):
+        db.session.commit()
+        flash("Your e-mail address has been updated.")
+    else:
+        flash("Invalid request.")
+    return redirect(url_for("main.index"))
