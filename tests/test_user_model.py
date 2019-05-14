@@ -76,3 +76,15 @@ class UserModelTestCase(unittest.TestCase):
         token = u.generate_email_change_token(new_email="test2@example.com")
         self.assertTrue(u.change_email(token))
         self.assertTrue(u.email == "test2@example.com")
+
+    def test_invalid_email_change_token(self):
+        u = User(email="test@example.com", password="test")
+        db.session.add(u)
+        db.session.commit()
+        token = u.generate_email_change_token(new_email="test2@example.com")
+        # Add a single character to mess up the token.
+        token = token + "x"
+        # Now assure us that the e-mail can't be changed with the messed-up
+        # token.
+        self.assertFalse(u.change_email(token))
+        self.assertFalse(u.email == "test2@example.com")
