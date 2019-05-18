@@ -1,0 +1,11 @@
+Dear {{ user.username }},
+
+To confirm your new e-mail address, please click on the link below:
+
+{{ url_for('auth.change_email', token=token, _external=True) }}
+
+Sincerely,
+
+The Application Team
+
+Note: replies to this e-mail address are not monitored.
