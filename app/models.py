@@ -104,3 +104,11 @@ class Role(db.Model):
 
     def __repr__(self):
         return "<Role %r>" % self.name
+
+
+class Permission:
+    FOLLOW = 1
+    COMMENT = 2
+    WRITE = 4
+    MODERATE = 8
+    ADMIN = 16
