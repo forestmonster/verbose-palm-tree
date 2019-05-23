@@ -105,3 +105,12 @@ class UserModelTestCase(unittest.TestCase):
         self.assertTrue(u.can(Permission.WRITE))
         self.assertFalse(u.can(Permission.MODERATE))
         self.assertFalse(u.can(Permission.ADMIN))
+
+    def test_moderator_role(self):
+        u = Role.query.filter_by(name='Moderator').first()
+        u = User(email='nagendra@example.com', password='krishna', role=r)
+        self.assertTrue(u.can(Permission.FOLLOW))
+        self.assertTrue(u.can(Permission.COMMENT))
+        self.assertTrue(u.can(Permission.WRITE))
+        self.assertTrue(u.can(Permission.MODERATE))
+        self.assertFalse(u.can(Permission.ADMIN))
