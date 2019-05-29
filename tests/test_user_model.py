@@ -1,6 +1,6 @@
 import unittest
 from time import sleep
-from app.models import User, Permission
+from app.models import User, Permission, AnonymousUser, Role
 from app import create_app, db
 
 
