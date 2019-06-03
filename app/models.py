@@ -112,6 +112,10 @@ class Role(db.Model):
         if self.permissions is None:
             self.permissions = 0
 
+    def add_permission(self, perm):
+        if not self.has_permission(perm):
+            self.permissions += perm
+
 
 class Permission:
     FOLLOW = 1
