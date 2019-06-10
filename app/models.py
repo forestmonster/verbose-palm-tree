@@ -116,6 +116,9 @@ class Role(db.Model):
         if not self.has_permission(perm):
             self.permissions += perm
 
+    def remove_permission(self, perm):
+        if self.has_permission(perm):
+            self.permissions -= perm
 
 class Permission:
     FOLLOW = 1
