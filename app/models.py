@@ -120,6 +120,9 @@ class Role(db.Model):
         if self.has_permission(perm):
             self.permissions -= perm
 
+    def reset_permissions(self):
+        self.permissions = 0
+
 class Permission:
     FOLLOW = 1
     COMMENT = 2
