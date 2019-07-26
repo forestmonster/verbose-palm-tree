@@ -87,7 +87,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config["SECRET_KEY"])
         try:
             data = s.loads(token.encode("utf-8"))
-        except Exception:
+        except:
             return False
         if data.get("confirm") != self.id:
             return False
@@ -122,6 +122,10 @@ class Role(db.Model):
 
     def reset_permissions(self):
         self.permissions = 0
+
+    def has_permission(self, perm):
+        return self.permissions & perm == perm
+
 
 class Permission:
     FOLLOW = 1
